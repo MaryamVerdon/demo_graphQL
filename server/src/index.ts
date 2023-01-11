@@ -4,18 +4,35 @@ import skillsController from "./controller/skills";
 import cors from "cors";
 import wilderRoutes from "./routes/wilders.route";
 import skillRoute from "./routes/skills.route";
-const app = express();
+
+/*
+* Apollo 
+ */
+import { ApolloServer } from "apollo-server";
+import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
+
+
+/*const app = express();
 
 app.use(express.json());
 app.use(cors());
 
 app.use("/wilders", wilderRoutes);
-app.use("/skills", skillRoute)
+app.use("/skills", skillRoute)*/
 
 async function start(): Promise<void> {
+const server = new ApolloServer({
+  typeDefs: [],
+  resolvers: [],
+  csrfPrevention: true,
+  cache: "bounded",
+  plugins: [ApolloServerPluginLandingPageLocalDefault({embed:true})]
+})
+  //construire un serveur apollo
   await db.initialize();
-  app.listen(4000, () => {
-    console.log("server ready");
+  server.listen().then(async (data) => {
+    await db.initialize();
+    console.log(`server ready ${data.url}`);
   });
 }
 
