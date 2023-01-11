@@ -1,26 +1,35 @@
 import { Resolver, Query, Mutation, Arg } from "type-graphql";
+import Skill, { CreateSkillInput, UpdateSkillInput } from "../entity/Skill";
+import { ResponseMessage } from "../services/common.type";
 
 @Resolver()
 export default class SkillResolver {
-    @Query(() => any)//retournera un tableau de skill
-    async read(): Promise<any> { 
-        return [];
-    }
+  @Query(() => [Skill]) //retournera un tableau de Skill
+  async readSkill(): Promise<Skill[]> {
+    //retournera un tableau de Skill
+    return [];
+  }
 
-    @Mutation(() => any ) //retournera un skill
-    async create(@Arg("createSkillInput") createSkillInput: any): Promise<any> {
-        //contient le name
-        return null;
-    }
+  @Mutation(() => Skill) //retournera un Skill
+  async createSkill(
+    @Arg("createSkillInput") createSkillInput: CreateSkillInput
+  ): Promise<Skill> {
+    // retournera un Skill
+    return {} as Skill;
+  }
 
-    @Mutation(() => any ) 
-    async update(@Arg("updateSkillInput") updateSkillInput: any): Promise<any> {
-        //!devra intégrer l'id et les infos pratiques
-        return {}
-    }
+  @Mutation(() => ResponseMessage) //retournera un Skill
+  async updateSkill(
+    @Arg("updateSkillInput") updateSkillInput: UpdateSkillInput
+  ): Promise<ResponseMessage> {
+    //! updateSkillInput devra intégrer l'id (pour l'update) et les infos basique comme pour la création (name)
+    // retournera un Skill
+    return {};
+  }
 
-    @Mutation(() => any ) //retournera {success: true, message: ""}
-    async delete(@Arg("id") id: String): Promise<any> {
-        return {}
-    }
+  @Mutation(() => ResponseMessage) // retournera {success: true, message: ""}
+  async deleteSkill(@Arg("id") id: String): Promise<ResponseMessage> {
+    // retournera {success: true, message: ""}
+    return {};
+  }
 }
