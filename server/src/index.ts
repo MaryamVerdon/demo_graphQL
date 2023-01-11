@@ -10,6 +10,7 @@ import skillRoute from "./routes/skills.route";
  */
 import { ApolloServer } from "apollo-server";
 import { ApolloServerPluginLandingPageLocalDefault } from "apollo-server-core";
+import "reflect-metadata";
 
 
 /*const app = express();
